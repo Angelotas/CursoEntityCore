@@ -3,6 +3,7 @@ using CursoEntityCore.Datos;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CursoEntityCore.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220803230810_CreacionTablaArticulo")]
+    partial class CreacionTablaArticulo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -39,12 +41,11 @@ namespace CursoEntityCore.Migrations
 
                     b.Property<string>("TituloArticulo")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("Titulo");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ArticuloId");
 
-                    b.ToTable("Article");
+                    b.ToTable("Articulo");
                 });
 
             modelBuilder.Entity("CursoEntityCore.Models.Categoria", b =>
