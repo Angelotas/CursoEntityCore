@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using CursoEntityCore.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace CursoEntityCore.Datos
 {
@@ -10,5 +11,6 @@ namespace CursoEntityCore.Datos
         }
 
         // Incluir modelos
+        public DbSet<Categoria> Categoria { get; set; }
     }
 }
