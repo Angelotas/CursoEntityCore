@@ -24,5 +24,9 @@ namespace CursoEntityCore.Models
         public double Calificacion { get; set; }
         [NotMapped]
         public bool IsFake { get; set; }
+
+        [ForeignKey("Categoria")]
+        public int Categoria_Id { get; set; }
+        public Categoria Categoria { get; set; }
     }
 }
