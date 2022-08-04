@@ -1,0 +1,33 @@
+﻿@model IEnumerable<CursoEntityCore.Models.Categoria>
+@{
+    ViewData["Title"] = "Lista Categorias";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    @if (Model.Count() > 0)
+    {
+        <table class="table table-striped border">
+            <tr>
+                <th>Nombre de categorias</th>
+                <th></th>
+                <th></th>
+            </tr>
+            @foreach (var categoria in Model)
+            {
+                <tr>
+                    <td>@categoria.Name</td>
+                    <td>@categoria.Id</td>
+                    <td>
+                        <a class="btn btn-primary text-whtie" asp-action="Editar" id="@categoria.Id">Editar</a>
+                        <a class="btn btn-danger text-whtie" asp-action="Borrar" id="@categoria.Id">Borrar</a>
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+    else
+    {
+        <p>No hay categorias</p>
+    }
+</div>
