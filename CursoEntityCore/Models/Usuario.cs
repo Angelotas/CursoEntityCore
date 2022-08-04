@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CursoEntityCore.Models
 {
@@ -9,5 +10,10 @@ namespace CursoEntityCore.Models
         [EmailAddress(ErrorMessage = "Introduzca un email válido")]
         //[RegularExpression(@"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$", ErrorMessage = "Introduzca un email válido")]
         public string Email { get; set; }
+
+        [ForeignKey("DetalleUsuario")]
+
+        public int DetalleUsuarioId { get; set; }
+        public DetalleUsuario DetalleUsuario { get; set; }
     }
 }
