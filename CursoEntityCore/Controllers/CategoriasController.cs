@@ -13,7 +13,11 @@ namespace CursoEntityCore.Controllers
         }
         public IActionResult Index()
         {
-            List<Categoria> listaCategorias = _context.Categoria.ToList();
+            // Solo mostrar activos y ordenados por fecha
+            List<Categoria> listaCategorias = _context.Categoria
+                .Where(c => c.Activo == true)
+                .OrderBy(c => c.FechaCreacion)
+                .ToList();
             return View(listaCategorias);
         }
 
@@ -123,27 +127,27 @@ namespace CursoEntityCore.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Editar(Categoria categoria)
         {
-            //if (ModelState.IsValid)
-            //{
-            //    _context.Categoria.Update(categoria);
-            //    _context.SaveChanges();
-            //    return RedirectToAction(nameof(Index));
-            //}
-            //return View(categoria);
-            string categoriaName = Request.Form["Name"];
-            int categoriaId = int.Parse(Request.Form["Id"]);
+            if (ModelState.IsValid)
+            {
+                _context.Categoria.Update(categoria);
+                _context.SaveChanges();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(categoria);
+            //string categoriaName = Request.Form["Name"];
+            //int categoriaId = int.Parse(Request.Form["Id"]);
 
-            if (categoriaId != null && !string.IsNullOrEmpty(categoriaName))
-            {
-                var categoriaToEdit = _context.Categoria.FirstOrDefault(c => c.Id == categoriaId);
-                categoriaToEdit.Name = categoriaName;
-            }
-            else
-            {
-                return View(categoria);
-            }
-            _context.SaveChanges();
-            return RedirectToAction(nameof(Index));
+            //if (categoriaId != null && !string.IsNullOrEmpty(categoriaName))
+            //{
+            //    var categoriaToEdit = _context.Categoria.FirstOrDefault(c => c.Id == categoriaId);
+            //    categoriaToEdit.Name = categoriaName;
+            //}
+            //else
+            //{
+            //    return View(categoria);
+            //}
+            //_context.SaveChanges();
+            //return RedirectToAction(nameof(Index));
         }
 
         [HttpGet]
