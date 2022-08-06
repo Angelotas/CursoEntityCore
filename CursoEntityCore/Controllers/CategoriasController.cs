@@ -13,7 +13,19 @@ namespace CursoEntityCore.Controllers
         }
         public IActionResult Index()
         {
-            // Solo mostrar activos y ordenados por fecha
+            // Seleccionar columnas espefificas
+            // var categorias=_contexto.Categoria.Where(n=>n.Nombre =="Test5").Select(n=>n).ToList();
+            // List<Categoria>listaCategorias=_contexto.Categoria.ToList();
+
+            // Agrupar
+            //contexto.Categoria
+            //.GroupBy(c => new { c.Activo })
+            //.Select(c => new { c.Key, Count = c.Count() }).ToList();
+
+            // Paginado
+            // List<Categoria> listaCategorias = _context..Skip(2).Take(2).ToList();
+
+
             List<Categoria> listaCategorias = _context.Categoria
                 .Where(c => c.Activo == true)
                 .OrderBy(c => c.FechaCreacion)
