@@ -51,6 +51,17 @@ namespace CursoEntityCore.Controllers
         }
 
         [HttpGet]
+        public IActionResult BorrarMultiplesCategorias2()
+        {
+            List<Categoria> categorias = _context.Categoria.ToList();
+            var categoriasToRemove = categorias.TakeLast(2);
+            
+            _context.Categoria.RemoveRange(categoriasToRemove);
+            _context.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
         public IActionResult CrearMultipleOption5()
         {
             List<Categoria> categorias = new List<Categoria>();
@@ -60,6 +71,17 @@ namespace CursoEntityCore.Controllers
                 // _context.Categoria.Add(new Categoria { Name = Guid.NewGuid().ToString() });
             }
             _context.Categoria.AddRange(categorias);
+            _context.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        public IActionResult BorrarMultiplesCategorias5()
+        {
+            List<Categoria> categorias = _context.Categoria.ToList();
+            var categoriasToRemove = categorias.TakeLast(5);
+
+            _context.Categoria.RemoveRange(categoriasToRemove);
             _context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
@@ -120,6 +142,15 @@ namespace CursoEntityCore.Controllers
             {
                 return View(categoria);
             }
+            _context.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        public IActionResult Borrar(int? id)
+        {
+            var categoriaToRemove = _context.Categoria.FirstOrDefault(a => a.Id == id);
+            _context.Categoria.Remove(categoriaToRemove);
             _context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
