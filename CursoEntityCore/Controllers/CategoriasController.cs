@@ -1,6 +1,7 @@
 ﻿using CursoEntityCore.Datos;
 using CursoEntityCore.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CursoEntityCore.Controllers
 {
@@ -25,12 +26,23 @@ namespace CursoEntityCore.Controllers
             // Paginado
             // List<Categoria> listaCategorias = _context..Skip(2).Take(2).ToList();
 
-
+            // Filtrado por activos y ordenado por fecha
             List<Categoria> listaCategorias = _context.Categoria
                 .Where(c => c.Activo == true)
                 .OrderBy(c => c.FechaCreacion)
                 .ToList();
             return View(listaCategorias);
+
+            // Similar al anterior pero con consultas convencionales
+            //var listaCategorias = _context.Categoria.FromSqlRaw("SELECT * FROM Categoria WHERE Activo = 1").ToList();
+            //return View(listaCategorias);
+
+            // Consulta con interpolación
+            //List<int> ids = new List<int>() { 26, 33 };
+            //var listaCategorias = _context.Categoria.FromSqlRaw($"SELECT * FROM Categoria WHERE Id IN ({String.Join(",", ids)})").ToList();
+            // const int ID = 26;
+            // var listaCategorias = _context.Categoria.FromSqlRaw($"SELECT * FROM Categoria WHERE Id = {ID}").ToList();
+            // return View(listaCategorias);
         }
 
         [HttpGet]
