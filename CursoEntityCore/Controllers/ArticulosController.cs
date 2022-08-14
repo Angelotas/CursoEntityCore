@@ -87,5 +87,14 @@ namespace CursoEntityCore.Controllers
                 return RedirectToAction(nameof(Index));
             }
         }
+
+        [HttpGet]
+        public IActionResult Borrar(int? id)
+        {
+            var articuloToRemove = _context.Articulo.FirstOrDefault(a => a.Articulo_Id == id);
+            _context.Articulo.Remove(articuloToRemove);
+            _context.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
