@@ -3,6 +3,7 @@ using CursoEntityCore.Models;
 using CursoEntityCore.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace CursoEntityCore.Controllers
 {
@@ -15,8 +16,19 @@ namespace CursoEntityCore.Controllers
         }
         public IActionResult Index()
         {
-            List<Articulo> listaArticulos = _context.Articulo.ToList();
-            return View(listaArticulos); 
+            // Opcion 1 sin datos relacionados (solo muestra Id de categoría)
+            //List<Articulo> listaArticulos = _context.Articulo.ToList();
+
+            //foreach (var articulo in listaArticulos)
+            //{
+            //    // Opción 2 carga manual buscando la descipción a partir de la tabla maestra --> Muchas consultas
+            //    // _context.Categoria.FirstOrDefault(c => c.Id == articulo.Categoria_Id);
+            //    // Opction 3 Carga explicita (Explicit loading) --> Varias consultas pero con optimización
+            //    _context.Entry(articulo).Reference(c => c.Categoria).Load();
+            //}
+            // Opcion 3 Carga ansiosa (Eager loading) --> Una única conslta
+            List<Articulo> listaArticulos = _context.Articulo.Include(c => c.Categoria).ToList();
+            return View(listaArticulos);
         }
 
         [HttpGet]

@@ -48,7 +48,7 @@
                     <td>@articulo.Descripcion</td>
                     <td>@articulo.Fecha</td>
                     <td>@articulo.Calificacion</td>
-                    <td>@articulo.Categoria_Id</td>
+                    <td>@articulo.Categoria.Name</td>
                     <td>
                         <a class="btn btn-primary text-whtie" asp-action="Editar" asp-route-id="@articulo.Articulo_Id">Editar</a>
                         <a class="btn btn-danger text-whtie" asp-action="Borrar" asp-route-id="@articulo.Articulo_Id">Borrar</a>
