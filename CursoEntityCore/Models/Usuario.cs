@@ -13,7 +13,7 @@ namespace CursoEntityCore.Models
 
         [ForeignKey("DetalleUsuario")]
 
-        public int DetalleUsuarioId { get; set; }
+        public int? DetalleUsuarioId { get; set; }
         public DetalleUsuario DetalleUsuario { get; set; }
     }
 }
