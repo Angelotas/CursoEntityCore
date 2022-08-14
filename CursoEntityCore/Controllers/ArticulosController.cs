@@ -49,5 +49,43 @@ namespace CursoEntityCore.Controllers
             });
             return View(articuloCategorias);
         }
+
+        [HttpGet]
+        public IActionResult Editar(int? id)
+        {
+            if (id == null)
+            {
+                return View();
+            }
+            ArticuloCategoriaVM articuloCategorias = new ArticuloCategoriaVM();
+            articuloCategorias.ListaCategorias = _context.Categoria.Select(c => new SelectListItem()
+            {
+                Text = c.Name,
+                Value = c.Id.ToString()
+            });
+
+            articuloCategorias.Articulo = _context.Articulo.FirstOrDefault(c => c.Articulo_Id == id);
+            if (articuloCategorias == null)
+            {
+                return NotFound();
+            }
+            return View(articuloCategorias);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Editar(ArticuloCategoriaVM articuloVM)
+        {
+            if (articuloVM.Articulo.Articulo_Id == 0)
+            {
+                return View(articuloVM.Articulo);
+            }
+            else
+            {
+                _context.Articulo.Update(articuloVM.Articulo);
+                _context.SaveChanges();
+                return RedirectToAction(nameof(Index));
+            }
+        }
     }
 }
