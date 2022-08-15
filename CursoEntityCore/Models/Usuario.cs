@@ -11,8 +11,6 @@ namespace CursoEntityCore.Models
         //[RegularExpression(@"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$", ErrorMessage = "Introduzca un email válido")]
         public string Email { get; set; }
 
-        [ForeignKey("DetalleUsuario")]
-
         public int? DetalleUsuarioId { get; set; }
         public DetalleUsuario DetalleUsuario { get; set; }
     }
